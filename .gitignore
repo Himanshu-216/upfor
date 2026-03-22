@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+.env.*
+!.env.example
+
+# Go
+backend/upfor.db
+backend/upfor.db-shm
+backend/upfor.db-wal
+backend/backend
+backend/seed/seed
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
