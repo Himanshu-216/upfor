@@ -755,3 +755,73 @@ header {
 }
 .btn-send:hover:not(:disabled) { background: #1c4f38; }
 .btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Auth screens ────────────────────────────────────────────────────────────── */
+.auth-card {
+  margin-top: 8px;
+}
+
+.auth-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1a202c;
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  font-size: 0.9rem;
+  color: #718096;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+/* tel + numeric inputs share text styling */
+.field input[type="tel"],
+.field input[type="text"] {
+  width: 100%;
+  padding: 13px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.18s;
+  background: #f8fafc;
+  color: #1a202c;
+}
+
+.field input[type="tel"]:focus {
+  border-color: #276749;
+  background: #fff;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #276749;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  transition: color 0.15s;
+}
+.btn-link:hover { color: #1c4f38; }
+
+.auth-resend-cooldown {
+  font-size: 0.85rem;
+  color: #a0aec0;
+}
+
+/* logout button in live status bar */
+.btn-logout-live {
+  padding: 8px 10px;
+  border-color: #a0aec0;
+  color: #718096;
+  font-size: 1rem;
+}
+.btn-logout-live:hover { background: #718096; color: #fff; border-color: #718096; }

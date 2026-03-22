@@ -1,32 +1,17 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"time"
 
-	_ "modernc.org/sqlite"
+	"upfor/db"
 )
 
 func main() {
-	db, err := sql.Open("sqlite", "upfor.db")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS checkins (
-		id TEXT PRIMARY KEY, name TEXT NOT NULL, activity TEXT NOT NULL,
-		address TEXT NOT NULL DEFAULT '',
-		lat REAL NOT NULL, lng REAL NOT NULL, updated_at DATETIME NOT NULL
-	)`)
-	if err == nil {
-		db.Exec(`ALTER TABLE checkins ADD COLUMN address TEXT NOT NULL DEFAULT ''`)
-	}
-	if err != nil {
-		log.Fatal(err)
-	}
+	database := db.Open("../upfor.db")
+	defer database.Close()
+	db.Migrate(database)
 
 	now := time.Now().UTC()
 
@@ -34,14 +19,12 @@ func main() {
 		id, name, activity, address string
 		lat, lng                    float64
 	}{
-		// ~1 km north of Magarpatta (near Hadapsar)
 		{"test-user-001", "Rahul", "pickleball", "Hadapsar, Pune", 18.5160, 73.9270},
-		// ~1.5 km west of Magarpatta (near Wanowrie)
 		{"test-user-002", "Priya", "walking", "Wanowrie, Pune", 18.5080, 73.9150},
 	}
 
 	for _, u := range users {
-		_, err := db.Exec(`
+		_, err := database.Exec(`
 			INSERT INTO checkins (id, name, activity, address, lat, lng, updated_at)
 			VALUES (?, ?, ?, ?, ?, ?, ?)
 			ON CONFLICT(id) DO UPDATE SET
@@ -55,7 +38,7 @@ func main() {
 		}
 	}
 
-	rows, _ := db.Query(`SELECT name, activity, lat, lng FROM checkins`)
+	rows, _ := database.Query(`SELECT name, activity, lat, lng FROM checkins`)
 	defer rows.Close()
 	fmt.Println("\n--- current checkins ---")
 	for rows.Next() {
