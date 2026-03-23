@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 
-const API = '/api'
+const API = 'https://upfor.onrender.com/api'
 
 // Reverse-geocode lat/lng → human-readable area using OpenStreetMap Nominatim (free, no key needed)
 async function reverseGeocode(lat, lng) {
