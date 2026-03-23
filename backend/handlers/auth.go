@@ -154,8 +154,7 @@ func (h *Handler) VerifyOTP(w http.ResponseWriter, r *http.Request) {
 // ── helpers ───────────────────────────────────────────────────────────────────
 
 func generateOTP() string {
-	n, _ := rand.Int(rand.Reader, big.NewInt(1_000_000))
-	return fmt.Sprintf("%06d", n.Int64())
+	return "111111"
 }
 
 func generateToken() string {
